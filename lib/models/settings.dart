@@ -1,5 +1,4 @@
 class Settings {
-  bool isPortrait;
   String backgroundColourHex;
   String dateColourHex;
   String timeColourHex;
@@ -11,7 +10,6 @@ class Settings {
   String customTimeFormat;
 
   Settings({
-    this.isPortrait,
     this.backgroundColourHex,
     this.dateColourHex,
     this.timeColourHex,
@@ -24,7 +22,6 @@ class Settings {
   });
 
   Settings.example() {
-    isPortrait = false;
     backgroundColourHex = '000000';
     dateColourHex = 'FFFFFF';
     timeColourHex = 'FFFFFF';
@@ -37,7 +34,6 @@ class Settings {
   }
 
   Settings.fromMap(Map<String, dynamic> map) {
-    this.isPortrait = map['isPortrait'] == 1;
     this.backgroundColourHex = map['backgroundColourHex'];
     this.dateColourHex = map['dateColourHex'];
     this.timeColourHex = map['timeColourHex'];
@@ -51,7 +47,6 @@ class Settings {
 
   Map<String, dynamic> toMap() {
     return {
-      'isPortrait': isPortrait ? 1 : 0,
       'backgroundColourHex': backgroundColourHex,
       'dateColourHex': dateColourHex,
       'timeColourHex': timeColourHex,
@@ -67,9 +62,6 @@ class Settings {
   Settings setSetting(String property, dynamic value) {
     Settings copy = this.clone();
     switch (property) {
-      case 'isPortrait':
-        copy.isPortrait = value;
-        break;
       case 'backgroundColourHex':
         copy.backgroundColourHex = value;
         break;
@@ -103,7 +95,6 @@ class Settings {
 
   Settings clone() {
     return Settings(
-      isPortrait: this.isPortrait,
       backgroundColourHex: this.backgroundColourHex,
       dateColourHex: this.dateColourHex,
       timeColourHex: this.timeColourHex,

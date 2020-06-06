@@ -30,7 +30,9 @@ class _SettingsPageState extends State<SettingsPage> {
               showDialog(
                 context: context,
                 builder: (context) {
-                  return ClockPage();
+                  return ClockPage(
+                    settings: _settings,
+                  );
                 },
               );
             },
@@ -47,7 +49,6 @@ class _SettingsPageState extends State<SettingsPage> {
             child: ListView(
               children: <Widget>[
                 if (_settings != null) ...[
-                  Text('orientation: ${_settings.isPortrait}'),
                   Text('colours - background, time'),
                   // Text('fonts'),
                   Text('24hr'),
@@ -67,8 +68,6 @@ class _SettingsPageState extends State<SettingsPage> {
   void retrieveNewData() async {
     Settings settings = await LocalDB().getSettings();
 
-    setState(() {
-      _settings = settings;
-    });
+    setState(() => _settings = settings);
   }
 }
