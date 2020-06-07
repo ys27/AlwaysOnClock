@@ -1,7 +1,7 @@
 class Settings {
-  String backgroundColourHex;
-  String dateColourHex;
-  String timeColourHex;
+  String backgroundcolorHex;
+  String datecolorHex;
+  String timecolorHex;
   bool is24Hr;
   bool showDate;
   bool showSeconds;
@@ -10,9 +10,9 @@ class Settings {
   String customTimeFormat;
 
   Settings({
-    this.backgroundColourHex,
-    this.dateColourHex,
-    this.timeColourHex,
+    this.backgroundcolorHex,
+    this.datecolorHex,
+    this.timecolorHex,
     this.is24Hr,
     this.showDate,
     this.showSeconds,
@@ -22,9 +22,9 @@ class Settings {
   });
 
   Settings.example() {
-    backgroundColourHex = '000000';
-    dateColourHex = 'FFFFFF';
-    timeColourHex = 'FFFFFF';
+    backgroundcolorHex = '000000';
+    datecolorHex = 'FFFFFF';
+    timecolorHex = 'FFFFFF';
     is24Hr = true;
     showDate = true;
     showSeconds = false;
@@ -34,9 +34,9 @@ class Settings {
   }
 
   Settings.fromMap(Map<String, dynamic> map) {
-    this.backgroundColourHex = map['backgroundColourHex'];
-    this.dateColourHex = map['dateColourHex'];
-    this.timeColourHex = map['timeColourHex'];
+    this.backgroundcolorHex = map['backgroundcolorHex'];
+    this.datecolorHex = map['datecolorHex'];
+    this.timecolorHex = map['timecolorHex'];
     this.is24Hr = map['is24Hr'] == 1;
     this.showDate = map['showDate'] == 1;
     this.showSeconds = map['showSeconds'] == 1;
@@ -47,9 +47,9 @@ class Settings {
 
   Map<String, dynamic> toMap() {
     return {
-      'backgroundColourHex': backgroundColourHex,
-      'dateColourHex': dateColourHex,
-      'timeColourHex': timeColourHex,
+      'backgroundcolorHex': backgroundcolorHex,
+      'datecolorHex': datecolorHex,
+      'timecolorHex': timecolorHex,
       'is24Hr': is24Hr ? 1 : 0,
       'showDate': showDate ? 1 : 0,
       'showSeconds': showSeconds ? 1 : 0,
@@ -62,14 +62,14 @@ class Settings {
   Settings setSetting(String property, dynamic value) {
     Settings copy = this.clone();
     switch (property) {
-      case 'backgroundColourHex':
-        copy.backgroundColourHex = value;
+      case 'backgroundcolorHex':
+        copy.backgroundcolorHex = value;
         break;
-      case 'dateColourHex':
-        copy.dateColourHex = value;
+      case 'datecolorHex':
+        copy.datecolorHex = value;
         break;
-      case 'timeColourHex':
-        copy.timeColourHex = value;
+      case 'timecolorHex':
+        copy.timecolorHex = value;
         break;
       case 'is24Hr':
         copy.is24Hr = value;
@@ -95,9 +95,9 @@ class Settings {
 
   Settings clone() {
     return Settings(
-      backgroundColourHex: this.backgroundColourHex,
-      dateColourHex: this.dateColourHex,
-      timeColourHex: this.timeColourHex,
+      backgroundcolorHex: this.backgroundcolorHex,
+      datecolorHex: this.datecolorHex,
+      timecolorHex: this.timecolorHex,
       is24Hr: this.is24Hr,
       showDate: this.showDate,
       showSeconds: this.showSeconds,

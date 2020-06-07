@@ -30,6 +30,7 @@ dependencies:
   wakelock: ^0.1.4+1
   sqflite: ^1.2.0
   intl: ^0.16.1
+  flutter_colorpicker: ^0.3.2
 
 dev_dependencies:
   flutter_test:

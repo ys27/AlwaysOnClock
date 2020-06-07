@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:intl/intl.dart';
+import 'package:flutter/services.dart';
 import 'package:AlwaysOnClock/models/settings.dart';
 import 'package:AlwaysOnClock/shared/HexColor.dart';
 import 'package:flutter/material.dart';
@@ -16,15 +17,16 @@ class ClockPage extends StatefulWidget {
 
 class _ClockPageState extends State<ClockPage> {
   Timer timer;
-  bool _appBarVisible = true;
   String _currentDate;
   String _currentTime;
 
   @override
   void initState() {
     super.initState();
+    _getDateAndTime();
     timer = Timer.periodic(Duration(seconds: 1), (_) => _getDateAndTime());
     Wakelock.enable();
+    SystemChrome.setEnabledSystemUIOverlays([]);
   }
 
   @override
@@ -38,38 +40,44 @@ class _ClockPageState extends State<ClockPage> {
   void dispose() {
     timer.cancel();
     Wakelock.disable();
+    SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    print('a ${widget.settings.backgroundcolorHex}');
+    print('b ${widget.settings.datecolorHex}');
+    print('c ${widget.settings.timecolorHex}');
     return GestureDetector(
-      onTap: () => setState(
-        () => _appBarVisible = !_appBarVisible,
-      ),
+      onTap: () => setState(() => Navigator.of(context).pop()),
       child: Scaffold(
-        backgroundColor: HexColor(widget.settings.backgroundColourHex),
-        appBar: _appBarVisible ? AppBar() : null,
+        backgroundColor: HexColor(widget.settings.backgroundcolorHex),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
+            // crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              Text(
-                _currentDate ?? '',
-                style: TextStyle(
-                  color: HexColor(widget.settings.dateColourHex),
-                  fontSize: MediaQuery.of(context).size.width /
-                      removeSymbols(_currentDate).length,
-                ),
-              ),
-              Text(
-                _currentTime ?? '',
-                style: TextStyle(
-                    color: HexColor(widget.settings.timeColourHex),
+              if (_currentDate != null) ...[
+                Text(
+                  _currentDate,
+                  style: TextStyle(
+                    color: HexColor(widget.settings.datecolorHex),
                     fontSize: MediaQuery.of(context).size.width /
-                        removeSymbols(_currentTime).length),
-              ),
+                        (removeSymbols(_currentDate).length + 4),
+                  ),
+                )
+              ],
+              if (_currentTime != null) ...[
+                Text(
+                  _currentTime,
+                  style: TextStyle(
+                    color: HexColor(widget.settings.timecolorHex),
+                    fontSize: MediaQuery.of(context).size.width /
+                        (removeSymbols(_currentTime).length + 1),
+                  ),
+                )
+              ],
             ],
           ),
         ),
@@ -79,25 +87,26 @@ class _ClockPageState extends State<ClockPage> {
 
   void _getDateAndTime() {
     final DateTime now = DateTime.now();
-    final String date = formatDate(now);
-    final String time = formatTime(now);
 
     setState(() {
-      _currentDate = date;
-      _currentTime = time;
+      _currentDate = formatDate(now);
+      _currentTime = formatTime(now);
     });
   }
 
   String formatDate(DateTime datetime) {
-    String format = widget.settings.customDateFormat == ''
+    String format = (widget.settings.customDateFormat == ''
         ? 'EEE, MMM d'
-        : widget.settings.customDateFormat;
-    return DateFormat(format).format(datetime);
+        : widget.settings.customDateFormat);
+    return widget.settings.showDate
+        ? DateFormat(format).format(datetime)
+        : null;
   }
 
   String formatTime(DateTime datetime) {
+    String seconds = widget.settings.showSeconds ? ':ss' : '';
     String format = widget.settings.customTimeFormat == ''
-        ? 'hh:mm aaa'
+        ? (widget.settings.is24Hr ? 'HH:mm$seconds' : 'h:mm$seconds aaa')
         : widget.settings.customTimeFormat;
     return DateFormat(format).format(datetime);
   }
