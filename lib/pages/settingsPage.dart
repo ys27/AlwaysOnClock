@@ -305,7 +305,7 @@ Widget colorPickerDialog(
     ),
     body: Container(
       padding: formPadding,
-      child: Column(
+      child: ListView(
         children: <Widget>[
           ColorPicker(
             pickerColor: currentColor,
