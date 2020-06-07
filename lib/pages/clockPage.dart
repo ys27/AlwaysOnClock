@@ -74,7 +74,7 @@ class _ClockPageState extends State<ClockPage> {
                   style: TextStyle(
                     color: HexColor(widget.settings.timecolorHex),
                     fontSize: MediaQuery.of(context).size.width /
-                        (removeSymbols(_currentTime).length + 1),
+                        (removeSymbols(_currentTime).length),
                   ),
                 )
               ],
