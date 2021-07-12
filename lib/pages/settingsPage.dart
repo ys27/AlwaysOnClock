@@ -1,13 +1,13 @@
-import 'package:AlwaysOnClock/models/settings.dart';
-import 'package:AlwaysOnClock/pages/clockPage.dart';
-import 'package:AlwaysOnClock/services/database.dart';
-import 'package:AlwaysOnClock/shared/HexColor.dart';
-import 'package:AlwaysOnClock/shared/components.dart';
-import 'package:AlwaysOnClock/shared/styles.dart';
+import 'package:always_on_clock/models/settings.dart';
+import 'package:always_on_clock/pages/clockPage.dart';
+import 'package:always_on_clock/services/database.dart';
+import 'package:always_on_clock/shared/HexColor.dart';
+// import 'package:always_on_clock/shared/components.dart';
+import 'package:always_on_clock/shared/styles.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+// import 'package:flutter/services.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
-import 'package:intl/intl.dart';
+// import 'package:intl/intl.dart';
 
 class SettingsPage extends StatefulWidget {
   final Settings settings;
@@ -24,11 +24,11 @@ class _SettingsPageState extends State<SettingsPage> {
   final _dateFormatController = TextEditingController();
   final _timeFormatController = TextEditingController();
 
-  final FocusNode _dateFormatFocus = new FocusNode();
-  final FocusNode _timeFormatFocus = new FocusNode();
+  // final FocusNode _dateFormatFocus = new FocusNode();
+  // final FocusNode _timeFormatFocus = new FocusNode();
 
-  bool _isDateFormatInFocus = false;
-  bool _isTimeFormatInFocus = false;
+  // bool _isDateFormatInFocus = false;
+  // bool _isTimeFormatInFocus = false;
 
   Color _backgroundcolor;
   Color _datecolor;
@@ -37,8 +37,8 @@ class _SettingsPageState extends State<SettingsPage> {
   bool _showDate;
   bool _showSeconds;
   bool _isMoving;
-  String _customDateFormat;
-  String _customTimeFormat;
+  // String _customDateFormat;
+  // String _customTimeFormat;
 
   @override
   void initState() {
@@ -50,22 +50,22 @@ class _SettingsPageState extends State<SettingsPage> {
     _showDate = widget.settings.showDate;
     _showSeconds = widget.settings.showSeconds;
     _isMoving = widget.settings.isMoving;
-    _customDateFormat = widget.settings.customDateFormat;
-    _customTimeFormat = widget.settings.customTimeFormat;
+    // _customDateFormat = widget.settings.customDateFormat;
+    // _customTimeFormat = widget.settings.customTimeFormat;
 
     _dateFormatController.text = widget.settings.customDateFormat;
     _timeFormatController.text = widget.settings.customTimeFormat;
 
-    _dateFormatFocus.addListener(_checkFocus);
-    _timeFormatFocus.addListener(_checkFocus);
+    // _dateFormatFocus.addListener(_checkFocus);
+    // _timeFormatFocus.addListener(_checkFocus);
   }
 
-  void _checkFocus() {
-    setState(() {
-      _isDateFormatInFocus = _dateFormatFocus.hasFocus;
-      _isTimeFormatInFocus = _timeFormatFocus.hasFocus;
-    });
-  }
+  // void _checkFocus() {
+  //   setState(() {
+  //     _isDateFormatInFocus = _dateFormatFocus.hasFocus;
+  //     _isTimeFormatInFocus = _timeFormatFocus.hasFocus;
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -97,16 +97,19 @@ class _SettingsPageState extends State<SettingsPage> {
               // Text('fonts'),
               // Text('Only on at certain times - can I turn back on?'),
               SizedBox(height: 10.0),
-              FlatButton(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Text('Set background color'),
-                    Icon(
-                      Icons.brightness_1,
-                      color: _backgroundcolor,
-                    ),
-                  ],
+              TextButton(
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 16.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      settingsText('Set background color'),
+                      Icon(
+                        Icons.brightness_1,
+                        color: _backgroundcolor,
+                      ),
+                    ],
+                  ),
                 ),
                 onPressed: () async {
                   Color color = await showDialog(
@@ -129,16 +132,19 @@ class _SettingsPageState extends State<SettingsPage> {
                 },
               ),
               SizedBox(height: 10.0),
-              FlatButton(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Text('Set date color'),
-                    Icon(
-                      Icons.brightness_1,
-                      color: _datecolor,
-                    ),
-                  ],
+              TextButton(
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 16.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      settingsText('Set date color'),
+                      Icon(
+                        Icons.brightness_1,
+                        color: _datecolor,
+                      ),
+                    ],
+                  ),
                 ),
                 onPressed: () async {
                   Color color = await showDialog(
@@ -161,16 +167,19 @@ class _SettingsPageState extends State<SettingsPage> {
                 },
               ),
               SizedBox(height: 10.0),
-              FlatButton(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Text('Set time color'),
-                    Icon(
-                      Icons.brightness_1,
-                      color: _timecolor,
-                    ),
-                  ],
+              TextButton(
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 16.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      settingsText('Set time color'),
+                      Icon(
+                        Icons.brightness_1,
+                        color: _timecolor,
+                      ),
+                    ],
+                  ),
                 ),
                 onPressed: () async {
                   Color color = await showDialog(
@@ -194,8 +203,9 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
               SizedBox(height: 10.0),
               SwitchListTile(
-                  title: Text('24-hour mode'),
+                  title: settingsText('24-hour mode'),
                   value: _is24Hr,
+                  contentPadding: EdgeInsets.symmetric(horizontal: 8.0),
                   onChanged: (val) {
                     setState(() => _is24Hr = val);
                     LocalDB().updateSettings(
@@ -204,8 +214,9 @@ class _SettingsPageState extends State<SettingsPage> {
                   }),
               SizedBox(height: 10.0),
               SwitchListTile(
-                  title: Text('Show date'),
+                  title: settingsText('Show date'),
                   value: _showDate,
+                  contentPadding: EdgeInsets.symmetric(horizontal: 8.0),
                   onChanged: (val) {
                     setState(() => _showDate = val);
                     LocalDB().updateSettings(
@@ -214,8 +225,9 @@ class _SettingsPageState extends State<SettingsPage> {
                   }),
               SizedBox(height: 10.0),
               SwitchListTile(
-                  title: Text('Show seconds'),
+                  title: settingsText('Show seconds'),
                   value: _showSeconds,
+                  contentPadding: EdgeInsets.symmetric(horizontal: 8.0),
                   onChanged: (val) {
                     setState(() => _showSeconds = val);
                     LocalDB().updateSettings(
@@ -224,8 +236,9 @@ class _SettingsPageState extends State<SettingsPage> {
                   }),
               SizedBox(height: 10.0),
               SwitchListTile(
-                  title: Text('Move date/time around'),
+                  title: settingsText('Move date/time around'),
                   value: _isMoving,
+                  contentPadding: EdgeInsets.symmetric(horizontal: 8.0),
                   onChanged: (val) {
                     setState(() => _isMoving = val);
                     LocalDB().updateSettings(
@@ -287,13 +300,13 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 }
 
-extension on TextEditingController {
-  void safeClear() {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      this.clear();
-    });
-  }
-}
+// extension on TextEditingController {
+//   void safeClear() {
+//     WidgetsBinding.instance.addPostFrameCallback((_) {
+//       this.clear();
+//     });
+//   }
+// }
 
 Widget colorPickerDialog(
     BuildContext context, Color currentColor, Color resetColor) {
@@ -315,16 +328,22 @@ Widget colorPickerDialog(
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
-              RaisedButton(
-                color: Theme.of(context).accentColor,
+              ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                      Theme.of(context).accentColor),
+                ),
                 child: Text(
                   'Reset',
                   style: TextStyle(color: Colors.white),
                 ),
                 onPressed: () => Navigator.of(context).pop(resetColor),
               ),
-              RaisedButton(
-                color: Theme.of(context).primaryColor,
+              ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                      Theme.of(context).primaryColor),
+                ),
                 child: Text(
                   'Select',
                   style: TextStyle(color: Colors.white),
@@ -336,5 +355,13 @@ Widget colorPickerDialog(
         ],
       ),
     ),
+  );
+}
+
+Widget settingsText(String text) {
+  return Text(
+    text,
+    style: TextStyle(
+        color: Colors.black, fontSize: 16, fontWeight: FontWeight.normal),
   );
 }

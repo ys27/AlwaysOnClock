@@ -1,8 +1,8 @@
 import 'dart:async';
-import 'package:intl/intl.dart';
 import 'package:flutter/services.dart';
-import 'package:AlwaysOnClock/models/settings.dart';
-import 'package:AlwaysOnClock/shared/HexColor.dart';
+import 'package:intl/intl.dart';
+import 'package:always_on_clock/models/settings.dart';
+import 'package:always_on_clock/shared/HexColor.dart';
 import 'package:flutter/material.dart';
 import 'package:wakelock/wakelock.dart';
 
@@ -46,9 +46,6 @@ class _ClockPageState extends State<ClockPage> {
 
   @override
   Widget build(BuildContext context) {
-    print('a ${widget.settings.backgroundcolorHex}');
-    print('b ${widget.settings.datecolorHex}');
-    print('c ${widget.settings.timecolorHex}');
     return GestureDetector(
       onTap: () => setState(() => Navigator.of(context).pop()),
       child: Scaffold(

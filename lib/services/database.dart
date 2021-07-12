@@ -1,5 +1,5 @@
-import 'package:AlwaysOnClock/models/settings.dart';
-import 'package:AlwaysOnClock/shared/config.dart';
+import 'package:always_on_clock/models/settings.dart';
+import 'package:always_on_clock/shared/config.dart';
 import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
 

@@ -1,6 +1,6 @@
-import 'package:AlwaysOnClock/models/settings.dart';
-import 'package:AlwaysOnClock/pages/settingsPage.dart';
-import 'package:AlwaysOnClock/services/database.dart';
+import 'package:always_on_clock/models/settings.dart';
+import 'package:always_on_clock/pages/settingsPage.dart';
+import 'package:always_on_clock/services/database.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(App());
