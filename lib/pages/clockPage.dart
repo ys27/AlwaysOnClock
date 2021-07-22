@@ -24,8 +24,10 @@ class _ClockPageState extends State<ClockPage> {
   void initState() {
     super.initState();
     _getDateAndTime();
-    timer = Timer.periodic(Duration(seconds: 1), (_) => _getDateAndTime());
-    Wakelock.enable();
+    timer = Timer.periodic(Duration(seconds: 1), (_) {
+      Wakelock.enable();
+      _getDateAndTime();
+    });
     SystemChrome.setEnabledSystemUIOverlays([]);
   }
 
